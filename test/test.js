@@ -1,11 +1,20 @@
 const fakeFetch = require('../test/mockApi')
 const { httpPoll } = require('../src/poll')
 
-httpPoll.delay = 0
-httpPoll.httpApi = fakeFetch
-httpPoll.httpArg = 3
-console.log(httpPoll.httpArg)
-httpPoll.subscribe(console.log)
+const poll = httpPoll({
+  delay: 0,
+  httpApi: fakeFetch,
+  httpArgs: [3]
+})
 
-setTimeout(_ => {httpPoll.delay = 5000}, 10000)
-setTimeout(_ => {httpPoll.unsubscribe()}, 15000)
+poll.subscribe(console.log)
+
+// setTimeout(_ => {
+//   let sum = 0
+//   for(let i = 0; i < 100000; i++) {
+//     sum += i * 1843
+//     console.log(sum)
+//   }
+// }, 9500)
+setTimeout(_ => {poll.delay = 5000}, 10000)
+setTimeout(_ => {poll.unsubscribe()}, 15000)

@@ -1,27 +1,30 @@
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 
-const httpPoll = {
+const getHttpPollObject = ({
+  delay,
+  httpApi,
+  httpArgs,
+}) => ({
   cancel: false,
-  delay: 0,
-  httpApi: null,
-  httpArg: 0,
+  delay,
+  httpApi,
+  httpArgs,
   unsubscribe: function() {this.cancel = true},
   subscribe : async function (cb) {
-    for await (const resource of httpPoll) {
+    for await (const resource of this) {
       cb(resource)
     }
   },
   [Symbol.asyncIterator]: async function*() {
     while (true) {
-      if(httpPoll.cancel) return
-      await sleep(httpPoll.delay)
-      yield await httpPoll.httpApi(httpPoll.httpArg)
+      if(this.cancel) return
+      await sleep(this.delay)
+      yield await this.httpApi(...this.httpArgs)
     }
   }
-}
+})
 
-
-module.exports = { httpPoll }
+module.exports = { httpPoll: getHttpPollObject }
 
 /*
 1. Polling
