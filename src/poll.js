@@ -5,16 +5,26 @@ const getHttpPollObject = ({
   httpApi,
   httpArgs,
 }) => ({
+  /** initial values */
   cancel: false,
   delay,
   httpApi,
   httpArgs,
+
+  /** setters */
+  setDelay(delay) { this.delay = delay },
+  setHttpApi(httpApi) { this.httpApi = httpApi },
+  setHttpArgs(httpArgs) { this.httpArgs = httpArgs },
+
+  /** subscriptions */
   unsubscribe: function() {this.cancel = true},
   subscribe : async function (cb) {
     for await (const resource of this) {
       cb(resource)
     }
   },
+
+  /** pull iteration */
   [Symbol.asyncIterator]: async function*() {
     while (true) {
       if(this.cancel) return
@@ -25,8 +35,3 @@ const getHttpPollObject = ({
 })
 
 module.exports = { httpPoll: getHttpPollObject }
-
-/*
-1. Polling
-2. Delay
-*/

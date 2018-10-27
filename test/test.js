@@ -16,5 +16,5 @@ poll.subscribe(console.log)
 //     console.log(sum)
 //   }
 // }, 9500)
-setTimeout(_ => {poll.delay = 5000}, 10000)
+setTimeout(_ => {poll.setDelay(5000); poll.setHttpArgs([5])}, 10000)
 setTimeout(_ => {poll.unsubscribe()}, 15000)
