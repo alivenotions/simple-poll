@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/alivenotions/simple-poll/issues"
   },
-  "homepage": "https://github.com/alivenotions/simple-poll#readme"
+  "homepage": "https://github.com/alivenotions/simple-poll#readme",
+  "devDependencies": {
+    "node-fetch": "2.2.0"
+  }
 }
