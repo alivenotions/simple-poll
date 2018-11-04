@@ -1,5 +1,5 @@
 {
-  "name": "simple-poll",
+  "name": "@alivenotions/simple-poll",
   "version": "0.1.0",
   "description": "Poll an http api",
   "main": "src/poll.js",
