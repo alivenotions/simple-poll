@@ -26,8 +26,15 @@ const getPollObject = ({
     /** subscriptions */
     unsubscribe: function () { this.cancel = true },
     subscribe: function (cb) {
-      if (this.delay_ === undefined) { this.delay_ = 0; console.log(warning('WARN: taking default delay (0 ms) as no delay was passed')) }
-      if (this.args_ === undefined) { this.args_ = []; console.log(warning('WARN: taking default args ([]) as no args were passed')) }
+      if (this.delay_ === undefined) {
+        this.delay_ = 0
+        console.log(warning('WARN: taking default delay (0 ms) as no delay was passed')) 
+      }
+      if (this.args_ === undefined) {
+        this.args_ = []
+        console.log(warning('WARN: taking default args ([]) as no args were passed'))
+        console.log(warning('      ensure that the executor is not expecting an arg'))
+      }
 
       if (typeof this.delay_ !== 'number') throw new Error(error('delay must be a number, recieved: ' + typeof this.delay_))
       if (!Array.isArray(this.args_)) throw new Error(error('args must be an array'))

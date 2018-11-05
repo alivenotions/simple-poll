@@ -1,4 +1,4 @@
-const fakeFetch = require('../test/mockApi')
+const fakeFetch = require('../example/mockApi')
 const { Poll } = require('../src/poll')
 const fetch = require('node-fetch')
 
@@ -6,7 +6,7 @@ const json = res => res.json().then(console.log)
 
 const poll = Poll()
   .executor(fakeFetch)
-  .args([3])
+  // .args([3])
   .delay(1000)
   .subscribe(console.log)
 
