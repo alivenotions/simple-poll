@@ -47,8 +47,8 @@ const getPollObject = ({
     /** pull iteration */
     [Symbol.asyncIterator]: async function* () {
       while (true) {
-        if (this.cancel) return
         await sleep(this.delay_)
+        if (this.cancel) return
         yield await this.executor_(...this.args_)
       }
     }
