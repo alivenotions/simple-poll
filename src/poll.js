@@ -1,32 +1,39 @@
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 
-const getHttpPollObject = ({
-  delay,
-  httpApi,
-  httpArgs,
-}) => {
+const getPollObject = ({
+  delay = 0,
+  executor,
+  args = [],
+} = {}) => {
 
   if (typeof delay !== 'number') throw new Error('delay must be a number, recieved: ' + typeof delay)
-  if (!Array.isArray(httpArgs)) throw new Error('httpArgs must be an array')
-
+  if (!Array.isArray(args)) throw new Error('args must be an array')
+  if (executor === undefined) throw new Error('executor cannot be undefined. Please pass in a function')
+  
   return {
     /** initial values */
     cancel: false,
     delay,
-    httpApi,
-    httpArgs,
+    executor,
+    args,
 
     /** setters */
     setDelay(delay) { this.delay = delay },
-    setHttpApi(httpApi) { this.httpApi = httpApi },
-    setHttpArgs(httpArgs) { this.httpArgs = httpArgs },
+    setExecutor(executor) { this.executor = executor },
+    setArgs(args) { this.args = args },
 
     /** subscriptions */
     unsubscribe: function () { this.cancel = true },
-    subscribe: async function (cb) {
+    subscribe: function (cb) {
+      this.poll(cb)
+      return this
+    },
+
+    poll: async function (cb) {
       for await (const resource of this) {
         cb(resource)
       }
+      return this
     },
 
     /** pull iteration */
@@ -34,10 +41,10 @@ const getHttpPollObject = ({
       while (true) {
         if (this.cancel) return
         await sleep(this.delay)
-        yield await this.httpApi(...this.httpArgs)
+        yield await this.executor(...this.args)
       }
     }
   }
 }
 
-module.exports = { httpPoll: getHttpPollObject }
+module.exports = { Poll: getPollObject }
