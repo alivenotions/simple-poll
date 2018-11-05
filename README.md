@@ -48,8 +48,8 @@ poll.subscribe(cb)
 
 // alternatively, you can compose this
 Poll()
-  .executor(fakeFetch)
-  .args([3])
+  .executor(fetch)
+  .args('https://jsonplaceholder.typicode.com/todos/1')
   .delay(1000)
   .subscribe(console.log)
 
