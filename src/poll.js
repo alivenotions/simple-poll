@@ -11,28 +11,28 @@ const getPollObject = ({
   args,
 } = {}) => {
 
-  if (delay === undefined) { delay = 0; console.log(warning('WARN: taking default delay (0 ms) as no delay was passed')) }
-  if (args === undefined) { args = []; console.log(warning('WARN: taking default args ([]) as no args were passed')) }
-
-  if (typeof delay !== 'number') throw new Error(error('delay must be a number, recieved: ' + typeof delay))
-  if (!Array.isArray(args)) throw new Error(error('args must be an array'))
-  if (executor === undefined) throw new Error(error('executor cannot be undefined. Please pass in a function'))
-
   return {
     /** initial values */
     cancel: false,
-    delay,
-    executor,
-    args,
+    delay_: delay,
+    executor_: executor,
+    args_: args,
 
     /** setters */
-    setDelay(delay) { this.delay = delay },
-    setExecutor(executor) { this.executor = executor },
-    setArgs(args) { this.args = args },
+    delay(delay) { this.delay_ = delay; return this },
+    executor(executor) { this.executor_ = executor; return this },
+    args(args) { this.args_ = args; return this },
 
     /** subscriptions */
     unsubscribe: function () { this.cancel = true },
     subscribe: function (cb) {
+      if (this.delay_ === undefined) { this.delay_ = 0; console.log(warning('WARN: taking default delay (0 ms) as no delay was passed')) }
+      if (this.args_ === undefined) { this.args_ = []; console.log(warning('WARN: taking default args ([]) as no args were passed')) }
+
+      if (typeof this.delay_ !== 'number') throw new Error(error('delay must be a number, recieved: ' + typeof this.delay_))
+      if (!Array.isArray(this.args_)) throw new Error(error('args must be an array'))
+      if (this.executor_ === undefined) throw new Error(error('executor cannot be undefined. Please pass in a function'))
+    
       this.poll(cb)
       return this
     },
@@ -48,8 +48,8 @@ const getPollObject = ({
     [Symbol.asyncIterator]: async function* () {
       while (true) {
         if (this.cancel) return
-        await sleep(this.delay)
-        yield await this.executor(...this.args)
+        await sleep(this.delay_)
+        yield await this.executor_(...this.args_)
       }
     }
   }
