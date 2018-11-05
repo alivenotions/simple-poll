@@ -1,15 +1,23 @@
+const chalk = require('chalk')
+
+const error = chalk.bold.red
+const warning = chalk.keyword('orange')
+
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 
 const getPollObject = ({
-  delay = 0,
+  delay,
   executor,
-  args = [],
+  args,
 } = {}) => {
 
-  if (typeof delay !== 'number') throw new Error('delay must be a number, recieved: ' + typeof delay)
-  if (!Array.isArray(args)) throw new Error('args must be an array')
-  if (executor === undefined) throw new Error('executor cannot be undefined. Please pass in a function')
-  
+  if (delay === undefined) { delay = 0; console.log(warning('WARN: taking default delay (0 ms) as no delay was passed')) }
+  if (args === undefined) { args = []; console.log(warning('WARN: taking default args ([]) as no args were passed')) }
+
+  if (typeof delay !== 'number') throw new Error(error('delay must be a number, recieved: ' + typeof delay))
+  if (!Array.isArray(args)) throw new Error(error('args must be an array'))
+  if (executor === undefined) throw new Error(error('executor cannot be undefined. Please pass in a function'))
+
   return {
     /** initial values */
     cancel: false,

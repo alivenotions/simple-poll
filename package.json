@@ -21,5 +21,8 @@
   "homepage": "https://github.com/alivenotions/simple-poll#readme",
   "devDependencies": {
     "node-fetch": "2.2.0"
+  },
+  "dependencies": {
+    "chalk": "2.4.1"
   }
 }

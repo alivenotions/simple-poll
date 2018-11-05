@@ -4,7 +4,7 @@ const fetch = require('node-fetch')
 
 const json = res => res.json().then(console.log)
 
-const poll = Poll({ executor: fakeFetch, })
+const poll = Poll({ executor: fakeFetch, args: [2] })
 .subscribe(console.log)
 
 // setTimeout(_ => {
