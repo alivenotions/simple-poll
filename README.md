@@ -1,13 +1,13 @@
 # simple-poll
 
-A polling utility that allows you to poll an http endpoint with configurable delay.
+A pull-based polling utility that allows you to poll any function that returns a promise with configurable delay.
 
 ## Create a polling object
 
-The httpPoll function expects an object with three keys:
-- delay: number
-- executor: a promise returning function
-- args: array of arguments to the executor function
+The Poll function expects an object with three keys:
+- delay: number, if not passed, a default of 0 is taken
+- executor: a promise returning function, throws an error if not passed
+- args: array of arguments to the executor function, if not passed, a default of an empty array is taken
 
 ```javascript
 const { Poll } = require('@alivenotions/simple-poll')
