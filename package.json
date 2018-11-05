@@ -1,7 +1,7 @@
 {
   "name": "@alivenotions/simple-poll",
   "version": "0.2.0",
-  "description": "Poll an http api",
+  "description": "Enable polling with configurable delay and implicit backpressure",
   "main": "src/poll.js",
   "directories": {
     "test": "test"
