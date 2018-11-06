@@ -36,9 +36,9 @@ const getPollObject = ({
         console.log(warning('      ensure that the executor is not expecting an arg'))
       }
 
-      if (typeof this.delay_ !== 'number') throw new Error(error('delay must be a number, recieved: ' + typeof this.delay_))
-      if (!Array.isArray(this.args_)) throw new Error(error('args must be an array'))
-      if (this.executor_ === undefined) throw new Error(error('executor cannot be undefined. Please pass in a function'))
+      if (typeof this.delay_ !== 'number') throw new TypeError(error('delay must be a number, recieved: ' + typeof this.delay_))
+      if (!Array.isArray(this.args_)) throw new TypeError(error('args must be an array'))
+      if (this.executor_ === undefined) throw new TypeError(error('executor cannot be undefined. Please pass in a function'))
     
       this.poll(cb)
       return this
