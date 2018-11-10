@@ -48,7 +48,6 @@ const getPollObject = ({
       for await (const resource of this) {
         cb(resource)
       }
-      return this
     },
 
     /** pull iteration */
