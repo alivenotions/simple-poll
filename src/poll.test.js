@@ -1,4 +1,5 @@
 const chai = require('chai')
+const sinon = require('sinon')
 const { Poll } = require('./poll')
 const expect = chai.expect
 
@@ -37,4 +38,66 @@ describe('error conditions', () => {
     expect(fn).to.throw(TypeError, 'must be an array')
   })
 
+})
+
+describe('polling tests', () => {
+  let clock
+
+  beforeEach(() => {
+    clock = sinon.useFakeTimers()
+  })
+
+  afterEach(() => {
+    clock.restore()
+  })
+
+  it('should poll with 0 ms(default) when no delay is passed', (done) => {
+    const val = 1
+    const executor = sinon.fake.resolves(2)
+    const poll = Poll()
+      .executor(executor)
+      .args([val])
+      .subscribe(returnedData => {
+        expect(returnedData).to.equal(2)
+        done()
+      })
+
+    clock.tick(1)
+  })
+
+  it('should poll with no args(default) when no args is passed', (done) => {
+    const executor = val => new Promise(resolve => resolve(val))
+    const poll = Poll()
+      .executor(executor)
+      .delay(1000)
+      .subscribe(returnedData => {
+        expect(returnedData).to.equal(undefined)
+        done()
+      })
+
+    clock.tick(1001)
+  })
+
+  it('should unsubscribe gracefully', (done) => {
+    let pollFrequency = 0
+    const executor = val => new Promise(resolve => resolve(val))
+    const poll = Poll()
+      .executor(executor)
+      .delay(1000)
+      .args([10])
+      .subscribe(returnedData => {
+        pollFrequency += 1
+        console.log(pollFrequency)
+        expect(pollFrequency).to.equal(0)
+        done()
+      })
+
+
+    clock.setTimeout(() => {
+      poll.unsubscribe()
+      expect(pollFrequency).to.equal(0)
+      done()
+    }, 500)
+    clock.tick(1000)
+  })
 })
