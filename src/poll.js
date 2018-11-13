@@ -1,4 +1,4 @@
-const chalk = require('chalk')
+import chalk from 'chalk'
 
 const error = chalk.bold.red
 const warning = chalk.keyword('orange')
@@ -61,4 +61,4 @@ const getPollObject = ({
   }
 }
 
-module.exports = { Poll: getPollObject }
+export { getPollObject as Poll }

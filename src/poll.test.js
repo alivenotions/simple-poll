@@ -1,7 +1,7 @@
-const chai = require('chai')
-const sinon = require('sinon')
-const { Poll } = require('./poll')
-const expect = chai.expect
+import { expect as _expect } from 'chai';
+import { useFakeTimers, fake } from 'sinon';
+import { Poll } from './poll';
+const expect = _expect
 
 const fakeFetch = num => new Promise((resolve, reject) => {
   console.log('yo! someone hit me up')
@@ -44,7 +44,7 @@ describe('polling tests', () => {
   let clock
 
   beforeEach(() => {
-    clock = sinon.useFakeTimers()
+    clock = useFakeTimers()
   })
 
   afterEach(() => {
@@ -53,7 +53,7 @@ describe('polling tests', () => {
 
   it('should poll with 0 ms(default) when no delay is passed', (done) => {
     const val = 1
-    const executor = sinon.fake.resolves(2)
+    const executor = fake.resolves(2)
     const poll = Poll()
       .executor(executor)
       .args([val])

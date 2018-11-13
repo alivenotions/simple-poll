@@ -7,10 +7,12 @@
     "prebuild": "rimraf dist",
     "build": "babel src --out-dir dist --ignore src/*.test.js",
     "commit": "git cz",
-    "test": "nyc mocha src/*.test.js",
+    "test": "mocha src/*.test.js --require @babel/register",
+    "test:watch": "npm t -- -w",
     "semantic-release": "semantic-release",
     "travis-deploy-once": "travis-deploy-once",
-    "coverage-report": "nyc report --reporter=html"
+    "coverage": "nyc npm test",
+    "coverage:report": "nyc report --reporter=html"
   },
   "repository": {
     "type": "git",
@@ -36,6 +38,7 @@
     "@babel/cli": "7.1.5",
     "@babel/plugin-proposal-async-generator-functions": "7.1.0",
     "@babel/preset-env": "7.1.5",
+    "@babel/register": "7.0.0",
     "chai": "4.2.0",
     "commitizen": "3.0.4",
     "cz-conventional-changelog": "2.1.0",
