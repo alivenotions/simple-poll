@@ -10,7 +10,7 @@
     "build:umd": "webpack --output-filename poll.umd.js -d",
     "build:umd.min": "webpack --output-filename poll.umd.min.js -p",
     "commit": "git cz",
-    "test": "mocha src/*.test.js --require @babel/register",
+    "test": "mocha --require @babel/register src/*.test.js ",
     "test:watch": "npm t -- -w",
     "semantic-release": "semantic-release",
     "travis-deploy-once": "travis-deploy-once",
@@ -39,7 +39,9 @@
   "homepage": "https://github.com/alivenotions/simple-poll#readme",
   "devDependencies": {
     "@babel/cli": "7.1.5",
+    "@babel/core": "7.1.6",
     "@babel/plugin-proposal-async-generator-functions": "7.1.0",
+    "@babel/plugin-transform-runtime": "7.1.0",
     "@babel/preset-env": "7.1.5",
     "@babel/register": "7.0.0",
     "babel-loader": "8.0.4",

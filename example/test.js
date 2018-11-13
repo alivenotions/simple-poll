@@ -1,5 +1,5 @@
 const fakeFetch = require('../example/mockApi')
-const { Poll } = require('../src/poll')
+const { Poll } = require('../dist/poll')
 const fetch = require('node-fetch')
 
 const json = res => res.json().then(console.log)
