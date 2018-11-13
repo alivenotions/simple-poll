@@ -1,17 +1,17 @@
 {
   "name": "@alivenotions/simple-poll",
-  "version": "0.2.2",
+  "version": "0.0.0-development",
   "description": "Enable polling with configurable delay and implicit backpressure",
   "main": "src/poll.js",
-  "directories": {
-    "test": "test"
-  },
   "scripts": {
-    "test": "nyc mocha src/*.test.js"
+    "commit": "git cz",
+    "test": "nyc mocha src/*.test.js",
+    "semantic-release": "semantic-release",
+    "travis-deploy-once": "travis-deploy-once"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/alivenotions/simple-poll.git"
+    "url": "https://github.com/alivenotions/simple-poll.git"
   },
   "author": "Bhavdeep Dhanjal <dhanjalbhavdeep@gmail.com>",
   "license": "MIT",
@@ -21,12 +21,21 @@
   "homepage": "https://github.com/alivenotions/simple-poll#readme",
   "devDependencies": {
     "chai": "4.2.0",
+    "commitizen": "3.0.4",
+    "cz-conventional-changelog": "2.1.0",
     "mocha": "5.2.0",
     "node-fetch": "2.2.0",
     "nyc": "13.1.0",
-    "sinon": "7.1.1"
+    "semantic-release": "^15.11.0",
+    "sinon": "7.1.1",
+    "travis-deploy-once": "^5.0.9"
   },
   "dependencies": {
     "chalk": "2.4.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
