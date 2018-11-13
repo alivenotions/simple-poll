@@ -1,8 +1,3 @@
-import chalk from 'chalk'
-
-const error = chalk.bold.red
-const warning = chalk.keyword('orange')
-
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 
 const getPollObject = ({
@@ -28,17 +23,17 @@ const getPollObject = ({
     subscribe: function (cb) {
       if (this.delay_ === undefined) {
         this.delay_ = 0
-        console.log(warning('WARN: taking default delay (0 ms) as no delay was passed')) 
+        console.log('WARN: taking default delay (0 ms) as no delay was passed') 
       }
       if (this.args_ === undefined) {
         this.args_ = []
-        console.log(warning('WARN: taking default args ([]) as no args were passed'))
-        console.log(warning('      ensure that the executor is not expecting an arg'))
+        console.log('WARN: taking default args ([]) as no args were passed')
+        console.log('      ensure that the executor is not expecting an arg')
       }
 
-      if (typeof this.delay_ !== 'number') throw new TypeError(error('delay must be a number, recieved: ' + typeof this.delay_))
-      if (!Array.isArray(this.args_)) throw new TypeError(error('args must be an array'))
-      if (this.executor_ === undefined) throw new TypeError(error('executor cannot be undefined. Please pass in a function'))
+      if (typeof this.delay_ !== 'number') throw new TypeError('delay must be a number, recieved: ' + typeof this.delay_)
+      if (!Array.isArray(this.args_)) throw new TypeError('args must be an array')
+      if (this.executor_ === undefined) throw new TypeError('executor cannot be undefined. Please pass in a function')
     
       this.poll(cb)
       return this
