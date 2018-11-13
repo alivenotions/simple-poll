@@ -7,7 +7,8 @@
     "commit": "git cz",
     "test": "nyc mocha src/*.test.js",
     "semantic-release": "semantic-release",
-    "travis-deploy-once": "travis-deploy-once"
+    "travis-deploy-once": "travis-deploy-once",
+    "coverage-report": "nyc report --reporter=html"
   },
   "repository": {
     "type": "git",
