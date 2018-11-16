@@ -1,21 +1,5 @@
 {
   "presets": [
-    [
-      "@babel/preset-env", {
-        "useBuiltIns": "usage"
-      }
-    ]
-  ],
-  "plugins": [
-    [
-      "@babel/plugin-transform-runtime",
-      {
-        "corejs": 2,
-        "helpers": true,
-        "regenerator": true,
-        "useESModules": false
-      }
-    ],
-    "@babel/plugin-proposal-async-generator-functions"
+    "@babel/preset-env"
   ]
 }

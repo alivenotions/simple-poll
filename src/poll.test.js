@@ -1,6 +1,6 @@
 import { expect as _expect } from 'chai';
 import { useFakeTimers, fake } from 'sinon';
-import { Poll } from './poll';
+import { Poll } from './index';
 const expect = _expect
 
 const fakeFetch = num => new Promise((resolve, reject) => {
