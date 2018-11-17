@@ -9,6 +9,25 @@
 
 A pull-based polling utility that allows you to poll any function that returns a promise with configurable delay.
 
+## Getting started
+
+Install using npm:
+
+```
+npm install @alivenotions/simple-poll
+```
+
+With a script tag:
+
+```html
+<script src="https://unpkg.com/@alivenotions/simple-poll@0.2.3/dist/poll.umd.min.js"></script>
+```
+
+## Support
+
+* Works for Node >= 6
+* Works on all modern browsers. (TODO: the exact versions and for IE)
+
 ## Create a polling object
 
 The Poll function expects an object with three keys:
