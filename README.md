@@ -20,7 +20,7 @@ npm install @alivenotions/simple-poll
 With a script tag:
 
 ```html
-<script src="https://unpkg.com/@alivenotions/simple-poll@0.2.3/dist/poll.umd.min.js"></script>
+<script src="https://unpkg.com/@alivenotions/simple-poll/dist/poll.umd.min.js"></script>
 ```
 
 ## Support
