@@ -1,21 +1,21 @@
 const fakeFetch = require('../example/mockApi')
-const { Poll } = require('../dist/poll')
-const fetch = require('node-fetch')
+const { Poll } = require('../dist/index')
+const mockApi = (num) => {
+  return new Promise((resolve, reject) => {
+    if (Math.random() * 10 > 7) {
+      throw ('Whoops!')
+    }
+    resolve(num)
+  })
+}
 
-const json = res => res.json().then(console.log)
+const p1 = Poll({
+  delay: 1000,
+  executor: mockApi,
+  args: [10]
+})
+.onError(err => console.log(err, 2))
 
-const poll = Poll()
-  .executor(fakeFetch)
-  // .args([3])
-  .delay(1000)
-  .subscribe(console.log)
+p1.subscribe(console.log)
+setTimeout(() => p1.unsubscribe(() => console.log('Finished🎊')), 5000)
 
-// setTimeout(_ => {
-//   let sum = 0
-//   for(let i = 0; i < 100000; i++) {
-//     sum += i * 1843
-//     console.log(sum)
-//   }
-// }, 9500)
-setTimeout(_ => {poll.delay(5000); poll.args([5])}, 10000)
-setTimeout(_ => {poll.unsubscribe()}, 14000)

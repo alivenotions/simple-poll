@@ -59,6 +59,7 @@ const poll = Poll()
 
 ## Subscription
 The poll object is lazy and won't start polling until it is subscribed to. Subscription takes a callback function that is expecting the response as the argument.
+The `unsubscribe` handler stops the polling and takes in a callback which will run after unsubscription.
 ```javascript
 const { Poll } = require('@alivenotions/simple-poll')
 const fetch = require('node-fetch')
@@ -79,9 +80,24 @@ Poll()
   .delay(1000)
   .subscribe(console.log)
 
-// to unsubscirbe
-poll.unsubscribe()
+// to unsubscribe
+poll.unsubscribe(cb)
 ```
+
+# Error handling
+The `onError` handler takes in a callback function that will run if the executor throws any error. The polling continues after that.
+
+```javascript
+const poll = Poll({
+  delay: 1000,
+  executor: fetch,
+  args: ['https://jsonplaceholder.typicode.com/todos/1'],
+})
+  .onError(err => console.error(err))
+  .subscribe()
+```
+
+If no `onError` handler is passed then the error is propagated and polling is cancelled. 
 
 ## Modifying configuration
 You can change the values of the polling object by using the following setters:

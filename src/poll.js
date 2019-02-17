@@ -18,8 +18,19 @@ const getPollObject = ({
     executor(executor) { this.executor_ = executor; return this },
     args(args) { this.args_ = args; return this },
 
+    onError: function (cb) {
+      if (typeof cb !== 'function') throw new TypeError('onError takes in a function')
+      this.onErrorCallback = cb 
+      return this
+    },
+
     /** subscriptions */
-    unsubscribe: function () { this.cancel = true },
+    unsubscribe: function (cb) {
+      this.cancel = true
+      if (typeof cb !== 'function') throw new TypeError('Unsubscribe takes in a function')
+      cb()
+    },
+
     subscribe: function (cb) {
       if (this.delay_ === undefined) {
         this.delay_ = 0
@@ -50,7 +61,16 @@ const getPollObject = ({
       while (true) {
         await sleep(this.delay_)
         if (this.cancel) return
-        yield await this.executor_(...this.args_)
+        try {
+          yield await this.executor_(...this.args_)
+        } catch (error) {
+          if (this.onErrorCallback === undefined) {
+            console.error('Terminating polling with error:', error)
+            return
+          } else {
+            this.onErrorCallback(error)
+          }
+        }
       }
     }
   }
