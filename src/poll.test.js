@@ -94,7 +94,7 @@ describe('polling tests', () => {
 
 
     clock.setTimeout(() => {
-      poll.unsubscribe()
+      poll.unsubscribe(console.log)
       expect(pollFrequency).to.equal(0)
       done()
     }, 500)
