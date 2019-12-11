@@ -2,8 +2,8 @@
 
 [![Travis (.org)](https://img.shields.io/travis/alivenotions/simple-poll.svg?style=flat-square)](https://travis-ci.org/alivenotions/simple-poll)
 [![GitHub](https://img.shields.io/github/license/alivenotions/simple-poll.svg?style=flat-square)](./LICENSE)
-![npm bundle size (minified)](https://img.shields.io/bundlephobia/min/@alivenotions/simple-poll.svg?style=flat-square)
-![npm bundle size (minified + gzip)](https://img.shields.io/bundlephobia/minzip/@alivenotions/simple-poll.svg?style=flat-square)
+[![npm bundle size (minified)](https://img.shields.io/bundlephobia/min/@alivenotions/simple-poll.svg?style=flat-square)](https://bundlephobia.com/result?p=@alivenotions/simple-poll)
+[![npm bundle size (minified + gzip)](https://img.shields.io/bundlephobia/minzip/@alivenotions/simple-poll.svg?style=flat-square)](https://bundlephobia.com/result?p=@alivenotions/simple-poll)
 ![npm (scoped)](https://img.shields.io/npm/v/@alivenotions/simple-poll.svg?style=flat-square)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg?style=flat-square)](https://github.com/semantic-release/semantic-release)
 
@@ -17,6 +17,12 @@ Install using npm:
 npm install @alivenotions/simple-poll
 ```
 
+Or with yarn:
+
+```
+yarn add @alivenotions/simple-poll
+```
+
 With a script tag:
 
 ```html
@@ -24,9 +30,9 @@ With a script tag:
 ```
 
 ## Support
-
-* Works for Node >= 6
-* Works on all modern browsers. (TODO: the exact versions and for IE)
+* Works for Node >= 10
+* Will work for older versions but polyfills are needed for async iterator and generators(`core-js/modules/es7.symbol.async-iterator` and `regenerator-runtime/runtime`).
+* Works on all modern browsers. For older browsers polyfills are needed.
 
 ## Create a polling object
 
