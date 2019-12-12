@@ -1,7 +1,5 @@
-import { expect as _expect } from 'chai';
 import { useFakeTimers, fake } from 'sinon';
 import { Poll } from './index';
-const expect = _expect
 
 const fakeFetch = num => new Promise((resolve, reject) => {
   console.log('yo! someone hit me up')
@@ -15,7 +13,7 @@ describe('error conditions', () => {
       .delay(1000)
       .args([3])
       .subscribe(console.log)
-    expect(fn).to.throw(TypeError, 'cannot be undefined')
+    expect(fn).toThrowError(TypeError)
   })
 
   it('should throw an error when delay is not a number', () => {
@@ -25,7 +23,7 @@ describe('error conditions', () => {
         .delay('100')
         .args([3])
         .subscribe(console.log)
-    expect(fn).to.throw(TypeError, 'must be a number')
+    expect(fn).toThrowError(TypeError)
   })
 
   it('should throw an error when args are not in an array', () => {
@@ -35,7 +33,7 @@ describe('error conditions', () => {
         .delay(5000)
         .args(3)
         .subscribe(console.log)
-    expect(fn).to.throw(TypeError, 'must be an array')
+    expect(fn).toThrowError(TypeError)
   })
 
 })
@@ -58,7 +56,7 @@ describe('polling tests', () => {
       .executor(executor)
       .args([val])
       .subscribe(returnedData => {
-        expect(returnedData).to.equal(2)
+        expect(returnedData).toBe(2)
         done()
       })
 
@@ -71,7 +69,7 @@ describe('polling tests', () => {
       .executor(executor)
       .delay(1000)
       .subscribe(returnedData => {
-        expect(returnedData).to.equal(undefined)
+        expect(returnedData).toBeUndefined()
         done()
       })
 
@@ -88,14 +86,14 @@ describe('polling tests', () => {
       .subscribe(returnedData => {
         pollFrequency += 1
         console.log(pollFrequency)
-        expect(pollFrequency).to.equal(0)
+        expect(pollFrequency).toBe(0)
         done()
       })
 
 
     clock.setTimeout(() => {
       poll.unsubscribe(console.log)
-      expect(pollFrequency).to.equal(0)
+      expect(pollFrequency).toBe(0)
       done()
     }, 500)
     clock.tick(1000)
