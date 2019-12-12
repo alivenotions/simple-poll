@@ -1,8 +1,10 @@
 {
-  "presets": [
-    "@babel/preset-env"
-  ],
-  "plugins": [
-    "@babel/plugin-proposal-async-generator-functions"
-  ]
+  "env": {
+    "production": {
+      "presets": ["@babel/preset-env"]
+    },
+    "test": {
+      "plugins": ["@babel/plugin-transform-modules-commonjs"]
+    }
+  }
 }
