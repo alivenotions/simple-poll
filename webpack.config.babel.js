@@ -1,4 +1,5 @@
 import { join } from 'path'
+import TerserPlugin from 'terser-webpack-plugin'
 
 const include = join(__dirname, 'src')
 
@@ -9,6 +10,10 @@ export default {
     libraryTarget: 'umd',
     library: 'simplePoll',
   },
+  optimization: {
+    minimize: true,
+    minimizer: [new TerserPlugin()],
+  },
   devtool: 'source-map',
   module: {
     rules: [
@@ -16,6 +21,9 @@ export default {
         test: /\.js$/,
         use: {
           loader: 'babel-loader',
+          options: {
+            plugins: ['@babel/plugin-transform-modules-commonjs'],
+          },
         }
       }
     ]

@@ -6,7 +6,8 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "NODE_ENV=production npm-run-all build:*",
-    "build:main": "babel src --out-dir dist --ignore src/*.test.js",
+    "build:main": "copyfiles -f src/* dist -e src/*.test.js",
+    "build:min": "terser src/index.js src/poll.js -m -c -o dist/poll.min.js",
     "build:umd": "webpack --output-filename poll.umd.js -d",
     "build:umd.min": "webpack --output-filename poll.umd.min.js -p",
     "commit": "git cz",
@@ -32,17 +33,16 @@
     "delay"
   ],
   "files": [
-    "dist",
+    "dist/*.js",
     "README.md",
     "example"
   ],
   "homepage": "https://github.com/alivenotions/simple-poll#readme",
   "devDependencies": {
-    "@babel/cli": "7.1.5",
     "@babel/plugin-transform-modules-commonjs": "7.7.5",
-    "@babel/preset-env": "7.1.5",
     "babel-loader": "8.0.4",
     "commitizen": "3.0.5",
+    "copyfiles": "2.1.1",
     "cz-conventional-changelog": "2.1.0",
     "jest": "24.9.0",
     "node-fetch": "2.2.0",
@@ -51,6 +51,8 @@
     "rimraf": "2.6.2",
     "semantic-release": "^15.11.0",
     "sinon": "7.1.1",
+    "terser": "4.4.2",
+    "terser-webpack-plugin": "2.2.3",
     "travis-deploy-once": "^5.0.9",
     "webpack": "4.25.1",
     "webpack-cli": "3.1.2"
