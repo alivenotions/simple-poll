@@ -4,7 +4,7 @@
 [![GitHub](https://img.shields.io/github/license/alivenotions/simple-poll.svg?style=flat-square)](./LICENSE)
 [![npm bundle size (minified)](https://img.shields.io/bundlephobia/min/@alivenotions/simple-poll.svg?style=flat-square)](https://bundlephobia.com/result?p=@alivenotions/simple-poll)
 [![npm bundle size (minified + gzip)](https://img.shields.io/bundlephobia/minzip/@alivenotions/simple-poll.svg?style=flat-square)](https://bundlephobia.com/result?p=@alivenotions/simple-poll)
-![npm (scoped)](https://img.shields.io/npm/v/@alivenotions/simple-poll.svg?style=flat-square)
+[![npm (scoped)](https://img.shields.io/npm/v/@alivenotions/simple-poll.svg?style=flat-square)](https://www.npmjs.com/package/@alivenotions/simple-poll)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg?style=flat-square)](https://github.com/semantic-release/semantic-release)
 
 A pull-based polling utility that allows you to poll any function that returns a promise with configurable delay.
